@@ -19,8 +19,8 @@ uci add_list system.ntp.server="time3.jaring.id"
 uci add_list system.ntp.server="time.cloudflare.com"  # Cloudflare's NTP server
 uci commit system && service sysntpd reload
 
-#fixphp
-
-wget -O /bin/fixphp "https://raw.githubusercontent.com/helmiau/openwrt-config/main/fix-xderm-libernet-gui" && chmod +x /bin/fixphp
-
+#install apk
+cd /aplikasi
+opkg install *.ipk
+rm -rf /aplikasi
 exit 0
