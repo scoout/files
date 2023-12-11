@@ -23,4 +23,13 @@ uci commit system && service sysntpd reload
 cd /aplikasi
 opkg install *.ipk
 rm -rf /aplikasi
+
+# Fixing Bug
+sed -i "/config uhttpd 'main'/a list interpreter '.php=/usr/bin/php-cgi'" /etc/config/uhttpd
+sed -i "/config uhttpd 'main'/a option ubus_prefix '/ubus'" /etc/config/uhttpd
+# Reboot setelah perbaikan
+echo -e "Rebooting..."
+sleep 4
+reboot
+
 exit 0
