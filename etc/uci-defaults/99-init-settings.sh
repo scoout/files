@@ -19,6 +19,18 @@ uci add_list system.ntp.server="time3.jaring.id"
 uci add_list system.ntp.server="time.cloudflare.com"  # Cloudflare's NTP server
 uci commit system && service sysntpd reload
 
+# xmm interface
+uci set network.l860GL=interface
+uci set network.l860GL.proto='xmm'
+uci set network.l860GL.device='/dev/ttyACM0'
+uci set network.l860GL.apn='internet'
+uci set network.l860GL.auth='auto'
+uci set network.l860GL.pdp='ipv4v6'
+uci add_list network.l860GL.dns='8.8.8.8'
+uci add_list network.l860GL.dns='8.8.4.4'
+uci commit network
+/etc/init.d/network restart
+
 #install apk
 cd /aplikasi
 opkg install *.ipk
