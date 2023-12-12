@@ -1,0 +1,12 @@
+
+config pingcontrol 'pingcontrol'
+	option enabled '1'
+	option check_period '100'
+	option iface 'l860GL'
+	option sw_before_modres '3'
+	option sw_before_sysres '0'
+	list testip '8.8.8.8'
+	list testip '1.1.1.1'
+	list testip 'www.google.com'
+	list testip 'www.instagram.com'
+
