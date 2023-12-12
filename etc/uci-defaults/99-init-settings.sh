@@ -30,11 +30,19 @@ uci add_list network.l860GL.dns='8.8.8.8'
 uci add_list network.l860GL.dns='8.8.4.4'
 uci commit network
 /etc/init.d/network restart
+sleep 1
 
-#install apk
+# aplikasi
 cd /aplikasi
 opkg install *.ipk
 rm -rf /aplikasi
+
+# opkg
+sed -i 's/option check_signature/# option check_signature/g' /etc/opkg.conf
+echo "src/gz custom_generic https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/generic" >> /etc/opkg/customfeeds.conf
+echo "src/gz custom_arch https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/$(cat /etc/os-release | grep OPENWRT_ARCH | awk -F '"' '{print $2}')" >> /etc/opkg/customfeeds.conf
+opkg update
+sleep 5
 
 # Fixing Bug
 sed -i "/config uhttpd 'main'/a list interpreter '.php=/usr/bin/php-cgi'" /etc/config/uhttpd
